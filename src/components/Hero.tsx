@@ -41,16 +41,16 @@ const Hero = () => {
       />
       
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="text-center lg:text-left w-full"
+            className="text-center lg:text-left"
           >
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-7xl font-bold mt-20 sm:mt-32 text-gray-900 leading-tight mb-6"
+              className="text-4xl sm:text-5xl md:text-7xl font-bold mt-16 sm:mt-32 text-gray-900 leading-tight mb-6"
             >
               Transform Your
               <motion.span 
@@ -62,18 +62,18 @@ const Hero = () => {
             </motion.h1>
             <motion.p 
               variants={itemVariants}
-              className="text-xl text-gray-600 mb-8 max-w-lg"
+              className="text-lg sm:text-xl text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0"
             >
               Creating extraordinary interiors that reflect your personality and elevate your lifestyle through innovative design solutions.
             </motion.p>
             <motion.div 
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <motion.button 
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="group bg-amber-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-amber-700 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
+                className="group bg-amber-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-amber-700 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
               >
                 Start Your Project
                 <motion.div
@@ -86,7 +86,7 @@ const Hero = () => {
               <motion.button 
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="group bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold border-2 border-gray-200 hover:border-amber-600 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
+                className="group bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold border-2 border-gray-200 hover:border-amber-600 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
               >
                 <Play className="w-5 h-5" />
                 Watch Our Work
@@ -98,9 +98,9 @@ const Hero = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="relative w-full"
+            className="relative hidden lg:block"
           >
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
                 <motion.div 
                   variants={imageVariants}
