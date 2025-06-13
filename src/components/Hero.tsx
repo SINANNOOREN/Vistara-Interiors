@@ -70,7 +70,8 @@ const Hero = () => {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <motion.button 
+            <a href="#contact">
+                <motion.button 
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="group bg-amber-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-amber-700 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
@@ -83,7 +84,9 @@ const Hero = () => {
                   <ArrowRight className="w-5 h-5" />
                 </motion.div>
               </motion.button>
-              <motion.button 
+            </a>
+             <a href="#portfolio">
+               <motion.button 
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="group bg-white text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold border-2 border-gray-200 hover:border-amber-600 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg"
@@ -91,6 +94,7 @@ const Hero = () => {
                 <Play className="w-5 h-5" />
                 Watch Our Work
               </motion.button>
+             </a>
             </motion.div>
           </motion.div>
           
