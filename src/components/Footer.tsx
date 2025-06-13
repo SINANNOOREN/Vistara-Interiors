@@ -15,11 +15,11 @@ const Footer = () => {
     ],
     company: [
       'About Us',
-      'Our Team',
-      'Portfolio',
-      'Testimonials',
-      'Careers',
-      'Blog'
+     
+      'Porojects',
+      'services ',
+      'contact us',
+      
     ]
   };
 
@@ -57,7 +57,7 @@ const Footer = () => {
       transition={{ duration: 0.8 }}
       className="bg-gray-900 text-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 pt-16">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -67,12 +67,12 @@ const Footer = () => {
         >
           {/* Brand and Contact */}
           <motion.div variants={itemVariants}>
-            <motion.h3
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold mb-4 cursor-pointer"
-            >
-              Vistara <span className="text-amber-500">Interiors</span>
-            </motion.h3>
+          <motion.h3 className="text-2xl font-bold text-white">
+    <div className="flex items-center gap-2">
+      <img src="/rtye.png" alt="Vistara Logo" className="w-8 h-8" />
+      Vistara <span className="text-amber-600">Interiors</span>
+    </div>
+  </motion.h3>
             <p className="text-gray-400 mb-6">
               Creating extraordinary interiors that reflect your personality and elevate your lifestyle through innovative design solutions.
             </p>
@@ -121,7 +121,7 @@ const Footer = () => {
           {/* Services */}
           <motion.div variants={itemVariants}>
             <h4 className="text-lg font-semibold mb-6">Services</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {footerLinks.services.map((link, index) => (
                 <motion.li
                   key={link}

@@ -46,10 +46,10 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-16 mt-4"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            About <span className="text-amber-600">Vistara Interiors</span>
+          <h2 className="text-4xl md:text-5xl font-bold  text-gray-900 mb-4">
+            About <span className="text-amber-600 ">Vistara Interiors</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We are passionate designers dedicated to creating exceptional spaces that inspire and delight. Our journey began with a simple belief: every space has the potential to be extraordinary.
@@ -57,6 +57,63 @@ const About = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+        
+          
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative"
+          >
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  className="h-40 bg-gradient-to-br from-amber-200 to-amber-300 rounded-full overflow-hidden cursor-pointer"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                    alt="Interior design process" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotate: -2 }}
+                  className="h-32 bg-gradient-to-br from-blue-200 to-blue-300 rounded-2xl overflow-hidden cursor-pointer"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                    alt="Design materials" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </motion.div>
+              </div>
+              <div className="space-y-4 pt-8">
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  className="h-32 bg-gradient-to-br from-green-200 to-green-300 rounded-2xl overflow-hidden cursor-pointer"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                    alt="Design sketches" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.05, rotate: -2 }}
+                  className="h-40 bg-gradient-to-br from-purple-200 to-purple-300 rounded-2xl overflow-hidden cursor-pointer"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                    alt="Finished space" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -115,61 +172,6 @@ const About = () => {
                 </motion.div>
               ))}
             </motion.div>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative"
-          >
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <motion.div 
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  className="h-40 bg-gradient-to-br from-amber-200 to-amber-300 rounded-full overflow-hidden cursor-pointer"
-                >
-                  <img 
-                    src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                    alt="Interior design process" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </motion.div>
-                <motion.div 
-                  whileHover={{ scale: 1.05, rotate: -2 }}
-                  className="h-32 bg-gradient-to-br from-blue-200 to-blue-300 rounded-2xl overflow-hidden cursor-pointer"
-                >
-                  <img 
-                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                    alt="Design materials" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </motion.div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <motion.div 
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  className="h-32 bg-gradient-to-br from-green-200 to-green-300 rounded-2xl overflow-hidden cursor-pointer"
-                >
-                  <img 
-                    src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                    alt="Design sketches" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </motion.div>
-                <motion.div 
-                  whileHover={{ scale: 1.05, rotate: -2 }}
-                  className="h-40 bg-gradient-to-br from-purple-200 to-purple-300 rounded-2xl overflow-hidden cursor-pointer"
-                >
-                  <img 
-                    src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                    alt="Finished space" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </motion.div>
-              </div>
-            </div>
           </motion.div>
         </div>
 

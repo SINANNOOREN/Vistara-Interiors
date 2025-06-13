@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,19 +14,53 @@ const Navbar = () => {
   ];
 
   // Animation variants for the drawer and overlay
-  const drawerVariants = {
+  const drawerVariants: Variants = {
     hidden: { x: '100%' },
-    visible: { x: 0, transition: { type: 'spring', stiffness: 400, damping: 40, when: 'beforeChildren', staggerChildren: 0.08 } },
-    exit: { x: '100%', transition: { type: 'spring', stiffness: 400, damping: 40 } }
+    visible: { 
+      x: 0, 
+      transition: { 
+        type: 'spring', 
+        stiffness: 400, 
+        damping: 40, 
+        when: 'beforeChildren', 
+        staggerChildren: 0.08 
+      } 
+    },
+    exit: { 
+      x: '100%', 
+      transition: { 
+        type: 'spring', 
+        stiffness: 400, 
+        damping: 40 
+      } 
+    }
   };
-  const overlayVariants = {
+
+  const overlayVariants: Variants = {
     hidden: { opacity: 0, backdropFilter: 'blur(0px)' },
-    visible: { opacity: 1, backdropFilter: 'blur(6px)', transition: { duration: 0.3 } },
-    exit: { opacity: 0, backdropFilter: 'blur(0px)', transition: { duration: 0.2 } }
+    visible: { 
+      opacity: 1, 
+      backdropFilter: 'blur(6px)', 
+      transition: { duration: 0.3 } 
+    },
+    exit: { 
+      opacity: 0, 
+      backdropFilter: 'blur(0px)', 
+      transition: { duration: 0.2 } 
+    }
   };
-  const itemVariants = {
+
+  const itemVariants: Variants = {
     hidden: { opacity: 0, x: 40 },
-    visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { 
+        type: 'spring', 
+        stiffness: 300, 
+        damping: 24 
+      } 
+    }
   };
 
   return (
@@ -44,12 +78,14 @@ const Navbar = () => {
   transition={{ duration: 0.6, delay: 0.2 }}
   className="flex-shrink-0"
 >
+<a href="#home" className="block">
   <h1 className="text-2xl font-bold text-gray-900">
     <div className="flex items-center gap-2">
       <img src="/rtye.png" alt="Vistara Logo" className="w-8 h-8" />
       Vistara <span className="text-amber-600">Interiors</span>
     </div>
   </h1>
+</a>
 </motion.div>
 
           

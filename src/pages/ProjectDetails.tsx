@@ -1,12 +1,19 @@
-
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, MapPin, Users, Award } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Calendar, MapPin, Users, Award, ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const projects = {
     '1': {
       title: 'Modern Minimalist Home',
@@ -58,6 +65,23 @@ const ProjectDetails = () => {
 
   const project = projects[id as keyof typeof projects] || projects['1'];
 
+  const handleImageClick = (image: string, index: number) => {
+    setSelectedImage(image);
+    setCurrentImageIndex(index);
+  };
+
+  const handleNextImage = () => {
+    const nextIndex = (currentImageIndex + 1) % project.images.length;
+    setCurrentImageIndex(nextIndex);
+    setSelectedImage(project.images[nextIndex]);
+  };
+
+  const handlePrevImage = () => {
+    const prevIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
+    setCurrentImageIndex(prevIndex);
+    setSelectedImage(project.images[prevIndex]);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -67,12 +91,15 @@ const ProjectDetails = () => {
         transition={{ duration: 0.8 }}
         className="relative h-[70vh] overflow-hidden"
       >
-        <img 
+        <motion.img 
           src={project.mainImage} 
           alt={project.title}
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5 }}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         
         <motion.button
           initial={{ opacity: 0, x: -20 }}
@@ -88,15 +115,23 @@ const ProjectDetails = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="absolute bottom-12 left-8 text-white"
+          className="absolute bottom-12 left-8 text-white max-w-3xl"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">{project.title}</h1>
-          <p className="text-xl opacity-90">{project.category} • {project.location}</p>
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="inline-block px-4 py-2 bg-amber-600/90 backdrop-blur-sm rounded-full text-sm font-medium mb-4"
+          >
+            {project.category}
+          </motion.span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">{project.title}</h1>
+          <p className="text-xl opacity-90">{project.location}</p>
         </motion.div>
       </motion.div>
 
       {/* Project Info */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
@@ -104,79 +139,127 @@ const ProjectDetails = () => {
       >
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              {project.description}
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="bg-white rounded-2xl p-8 shadow-lg mb-12"
+            >
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                {project.description}
+              </p>
+            </motion.div>
 
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Key Features</h3>
-            <div className="grid md:grid-cols-2 gap-4 mb-12">
-              {project.features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1 }}
-                  className="flex items-center space-x-3"
-                >
-                  <div className="w-2 h-2 bg-amber-600 rounded-full flex-shrink-0" />
-                  <span className="text-gray-700">{feature}</span>
-                </motion.div>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              className="bg-white rounded-2xl p-8 shadow-lg"
+            >
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Features</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {project.features.map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1 + index * 0.1 }}
+                    className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-amber-50 transition-colors duration-300"
+                  >
+                    <div className="w-2 h-2 bg-amber-600 rounded-full mt-2 flex-shrink-0" />
+                    <span className="text-gray-700">{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
-          <div className="space-y-8">
-            <div className="bg-gray-50 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Project Details</h3>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8 }}
+            className="lg:col-span-1"
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-lg sticky top-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">Project Details</h3>
               
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Calendar className="w-5 h-5 text-amber-600" />
+              <div className="space-y-6">
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-amber-50 transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-amber-600" />
+                  </div>
                   <div>
                     <p className="text-sm text-gray-500">Year</p>
                     <p className="font-semibold text-gray-900">{project.year}</p>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-amber-600" />
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-amber-50 transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <MapPin className="w-6 h-6 text-amber-600" />
+                  </div>
                   <div>
                     <p className="text-sm text-gray-500">Location</p>
                     <p className="font-semibold text-gray-900">{project.location}</p>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="flex items-center space-x-3">
-                  <Users className="w-5 h-5 text-amber-600" />
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-amber-50 transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <Users className="w-6 h-6 text-amber-600" />
+                  </div>
                   <div>
                     <p className="text-sm text-gray-500">Client</p>
                     <p className="font-semibold text-gray-900">{project.client}</p>
                   </div>
-                </div>
+                </motion.div>
                 
-                <div className="flex items-center space-x-3">
-                  <Award className="w-5 h-5 text-amber-600" />
+                <motion.div 
+                  whileHover={{ scale: 1.02 }}
+                  className="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-amber-50 transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                    <Award className="w-6 h-6 text-amber-600" />
+                  </div>
                   <div>
                     <p className="text-sm text-gray-500">Area</p>
                     <p className="font-semibold text-gray-900">{project.area}</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 
       {/* Image Gallery */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16"
       >
-        <h3 className="text-3xl font-bold text-gray-900 mb-8">Project Gallery</h3>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">Project Gallery</h3>
+          <p className="text-gray-600">Explore the stunning details of this project</p>
+        </motion.div>
+
         <div className="grid md:grid-cols-3 gap-6">
           {project.images.map((image, index) => (
             <motion.div
@@ -187,6 +270,7 @@ const ProjectDetails = () => {
               transition={{ delay: index * 0.2 }}
               whileHover={{ y: -10, scale: 1.02 }}
               className="group cursor-pointer"
+              onClick={() => handleImageClick(image, index)}
             >
               <div className="relative overflow-hidden rounded-xl aspect-square">
                 <img 
@@ -194,15 +278,77 @@ const ProjectDetails = () => {
                   alt={`${project.title} - Image ${index + 1}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <Maximize2 className="w-8 h-8 text-white" />
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
       </motion.section>
 
+      {/* Image Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.button
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <X className="w-6 h-6" />
+            </motion.button>
+
+            <motion.button
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="absolute left-4 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevImage();
+              }}
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </motion.button>
+
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="absolute right-4 text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNextImage();
+              }}
+            >
+              <ChevronRight className="w-8 h-8" />
+            </motion.button>
+
+            <motion.img
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              src={selectedImage}
+              alt="Selected project image"
+              className="max-h-[90vh] max-w-[90vw] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* CTA Section */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

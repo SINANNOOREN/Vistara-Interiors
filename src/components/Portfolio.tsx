@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { ExternalLink, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 const Portfolio = () => {
@@ -65,9 +64,11 @@ const Portfolio = () => {
 
   const handleViewDetails = (projectId: number) => {
     navigate(`/project/${projectId}`);
+    // Scroll to top after navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -78,12 +79,12 @@ const Portfolio = () => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
+      transition: { duration: 0.6, ease: "easeOut" }
     }
   };
 
@@ -105,16 +106,14 @@ const Portfolio = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="text-amber-600">Portfolio</span>
+            Our <span className="text-amber-600">projects</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Discover our collection of thoughtfully designed spaces that blend functionality with aesthetic excellence.
           </p>
         </motion.div>
 
-      
-
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

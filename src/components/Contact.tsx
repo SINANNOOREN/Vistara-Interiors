@@ -41,7 +41,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 py-10 flex flex-col items-center">
+    <section id="contact" className="min-h-screen bg-gray-50 dark:bg-gray-900 px-4 py-10 flex flex-col items-center">
       {/* Top Heading */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
