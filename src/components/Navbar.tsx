@@ -7,7 +7,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Home', href: '#home' },
-    { name: 'Portfolio', href: '#portfolio' },
+    { name: 'Porojects', href: '#portfolio' },
     { name: 'Services', href: '#services' },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' }
@@ -178,7 +178,7 @@ const Navbar = () => {
                   </motion.a>
                 ))}
               </nav>
-              <div className="mt-auto pt-10 flex flex-col gap-3">
+              <div className=" pt-10 flex flex-col mt-2 gap-3">
                 <a href="#contact" className="block w-full text-center bg-amber-600 text-white font-bold py-3 rounded-2xl shadow-lg hover:bg-amber-700 transition-all duration-200 text-base tracking-wide">
                   Get in Touch
                 </a>
